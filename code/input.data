@@ -1,0 +1,106 @@
+@struct:decl V2I: { x: I32, y: I32 }
+@struct:decl V3I: { x: I32, y: I32, z: I32 }
+@struct:decl V4I: { x: I32, y: I32, z: I32, w: I32 }
+@struct:decl V2:  { x: F32, y: F32 }
+@struct:decl V3:  { x: F32, y: F32, z: F32 }
+@struct:decl V4:  { x: F32, y: F32, z: F32, w: F32 }
+
+// @embeds enable you to do access data from other structs directly
+// so instead of doing this (which still works!):
+// bitmap.size.x
+// you can do this
+// bitmap.x
+
+@struct Bitmap: {
+  pixels: @ptr   U32,
+  size  : @embed V2,
+  align :        V2,
+  size_world :   V2,
+}
+
+@struct FontGlyph: {
+  xadvance: F32,
+  codepoint: U32,
+  bitmap: @embed Bitmap, // embeding complex structures(which also contain embeds) works very nicely! 
+}
+
+@struct Font: {
+  line_advance: F32, 
+  ascent: F32, 
+  descent: F32, 
+  height: F32, 
+  glyphs: @ptr FontGlyph,
+  glyphs_len: I32, 
+}
+
+@enum EventKind:{
+  None,
+  KeyDown,
+  KeyUp,
+  MouseMove,
+  MouseWheel,
+  KeyboardText,
+}
+
+@mapping_enum: Win32KeyMap KeyID: {
+  None,
+  Up: VK_UP,
+  Down: VK_DOWN,
+  Left: VK_LEFT,
+  Right: VK_RIGHT,
+  Escape: VK_ESCAPE,
+  A: "65",
+  B: "66",
+  C: "67",
+  D: "68",
+  E: "69",
+  F: "70",
+  G: "71",
+  H: "72",
+  I: "73",
+  J: "74",
+  K: "75",
+  L: "76",
+  M: "77",
+  N: "78",
+  O: "79",
+  P: "80",
+  Q: "81",
+  R: "82",
+  S: "83",
+  T: "84",
+  U: "85",
+  V: "86",
+  W: "87",
+  X: "88",
+  Y: "89",
+  Z: "90",
+  0: "48",
+  1: "49",
+  2: "50",
+  3: "51",
+  4: "52",
+  5: "53",
+  6: "54",
+  7: "55",
+  8: "56",
+  9: "57",
+  MouseLeft,
+  MouseRight,
+  MouseMiddle,
+  Count,
+}
+
+@struct Win32Bitmap: {
+ bitmap: Bitmap,
+ dc    : HDC,
+ dib: HBITMAP,
+}
+
+@struct Win32FontCtx: {
+ font: HFONT,
+ bitmap: Win32Bitmap,
+ text_metric: TEXTMETRIC,
+ result: Font,
+}
+
