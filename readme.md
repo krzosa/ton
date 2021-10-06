@@ -1,7 +1,7 @@
 Small data description language similar to JSON made for fun.
 
 Sample from input.data file: 
-'''
+``` c
 @data cool_data: {
   "Cool data string": 123.51525,
   "Object": {
@@ -26,13 +26,14 @@ Sample from input.data file:
   MouseWheel,
   KeyboardText,
 }
-'''
+```
 
 Example of generated code using the AST can be found in the generated/ folder.
 
-To compile on windows you need:
-Visual Studio installed
-Clang
+## To compile you need:
+* Windows
+* Visual Studio installed
+* Clang / LLVM installed
 
-How to build: 
-clang build.cpp && a.exe
+## Build command: 
+```clang build.cpp && a.exe```
