@@ -1,11 +1,10 @@
 #define BUILD_SYSTEM
 #include "code/base.cpp"
 #include "code/lang_tests.cpp"
-B32 run_tests = true;
 
 int build_main(Build *b) {
-  if(run_tests || match_console_arg(b, lit("run_tests"))) {
-    do_tests();
+  if(match_console_arg(b, lit("run_tests"))) {
+    run_tests();
   }
   
   setup_default_project(b);

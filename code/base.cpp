@@ -1,3 +1,4 @@
+// Reduced base layer: 2021/10/05 
 #pragma once
 
 #if defined(__clang__)
@@ -1933,7 +1934,7 @@ struct UnitTester {
 #define unit_test(name) fn UNIT_TEST(name); global UnitTester tester##name(#name, name); \
 fn UNIT_TEST(name)
 
-fn void do_tests() {
+fn void run_tests() {
   console_log("--- Tests ---\n");
   for(I64 i = 0; i < global_unit_tests_len; i++) {
     Scratch scratch;

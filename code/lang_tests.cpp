@@ -1,37 +1,6 @@
 #include "base.cpp"
 #include "lang.cpp"
 
-#if 0
-@struct Lex: {
-  filename: S8,
-  stream: S8,
-  I64 stream_i,
-  I64 line,
-  I64 column,
-}
-
-@data
-data: {
-  "Cool data string": 123.51525,
-  "Object thing": {
-    Nice: 123,
-    Nicee: "12242",
-  },
-  List: {1, 2, 3, 4}
-}
-
-@function
-main: {arg1, arg2}
-{
-  a: (12*4)+4,
-  if: {123 == 123} 
-  {
-    
-  }
-  return: a,
-}
-#endif
-
 unit_test(test_lexing_identifiers) {
   MetaCtx ctx = begin_parse(arena);
   begin_lexing(ctx, lit("TestThing _Test_Thing Test_Thing Test12345"
@@ -147,28 +116,28 @@ unit_test(test_parse) {
     lit("object: { '123141': { thing, thing2, thing3: 'asdafa asdas' }, numbers: 12351.5124 }"),
     lit("@tag @thing object: { '123141': { thing, thing2, thing3: 'asdafa asdas' }, @thing:{1,2,3} numbers: 12351.5124 }"),
     lit(R"FOO(
-                                                                                                          @tag
-                                                                                                          @thing
-                                                                                                          object: {
-                                                                                                            123141: {
-                                                                                                              thing,
-                                                                                                              thing2,
-                                                                                                              thing3: "asdafa asdas"
-                                                                                                            },
-                                                                                                            @thing: {
-                                                                                                              1.000000,
-                                                                                                              2.000000,
-                                                                                                              3.000000
-                                                                                                            }
-                                                                                                            numbers: 12351.512400
-                                                                                                          }
-                                                                                                        
-                                                                                                        
-                                                                                                            @CoolTag
-                                                                                                            "Test second thing yes": {
-                                                                                                            }
-                                                                                                        
-                                                                                                           )FOO"),
+                                                                                                              @tag
+                                                                                                              @thing
+                                                                                                              object: {
+                                                                                                                123141: {
+                                                                                                                  thing,
+                                                                                                                  thing2,
+                                                                                                                  thing3: "asdafa asdas"
+                                                                                                                },
+                                                                                                                @thing: {
+                                                                                                                  1.000000,
+                                                                                                                  2.000000,
+                                                                                                                  3.000000
+                                                                                                                }
+                                                                                                                numbers: 12351.512400
+                                                                                                              }
+                                                                                                            
+                                                                                                            
+                                                                                                                @CoolTag
+                                                                                                                "Test second thing yes": {
+                                                                                                                }
+                                                                                                            
+                                                                                                               )FOO"),
   };
   
   for(U64 i = 0; i < array_cap(data); i++) {
