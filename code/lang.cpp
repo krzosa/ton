@@ -29,7 +29,6 @@ struct AST {
   };
 };
 
-
 fn AST *new_ast(MArena *arena, S8 key=s8(), ASTKind kind=ASTKind_None) {
   AST *ast = push_struct(arena, AST);
   zero_struct(ast); 
